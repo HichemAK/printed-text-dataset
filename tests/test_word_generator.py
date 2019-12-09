@@ -35,9 +35,12 @@ class TestWordGenerator(unittest.TestCase):
 
         counter_chars = [i / nb_chars for i in counter_chars]
         counter_length = [i/nb_iter for i in counter_length]
+
+        # Check length distribution
         for i in range(len(counter_length)):
             self.assertAlmostEqual(counter_length[i], wg.length_distribution[i], delta=eps)
 
+        # Check character distribution
         for i in range(len(counter_chars)):
             self.assertAlmostEqual(counter_chars[i], wg.character_distribution[i], delta=eps)
 
