@@ -3,6 +3,7 @@ from printed_text_dataset.text_generation.distribution import Distribution
 
 class TestDistribution(unittest.TestCase):
     def test_sample(self):
+        """Check the probabilistic properties of the distribution"""
         d = {1:0.2, 2:0.3, 3:0.1, 4:0.2, 5:0.2}
         count = {k:0 for k in d.keys()}
         distrib = Distribution(d)
