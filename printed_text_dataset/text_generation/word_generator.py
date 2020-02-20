@@ -1,6 +1,9 @@
 import random
 
-class WordGenerator:
+from printed_text_dataset.text_generation.generator import _Generator
+
+
+class WordGenerator(_Generator):
     """A class that generates words through calling the function sample()"""
     def __init__(self, unicode_characters, length_distribution, character_distrbution=None):
         """unicode_characters : The list of characters that will be used to generate the words
@@ -11,6 +14,7 @@ class WordGenerator:
         character_distribution : A list of integers that represents the probability of each character to be chosen
         during sampling
         """
+        super().__init__()
         self.unicode_characters = unicode_characters
         self.length_distribution = length_distribution
         if character_distrbution is None:

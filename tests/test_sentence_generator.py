@@ -1,6 +1,6 @@
 import unittest
-from printed_text_dataset.text_gen.sentence_generator import SentenceGenerator
-from printed_text_dataset.text_gen.word_generator import WordGenerator
+from printed_text_dataset.text_generation.sentence_generator import SentenceGenerator
+from printed_text_dataset.text_generation.word_generator import WordGenerator
 
 class TestSentenceGenerator(unittest.TestCase):
     def setUp(self):

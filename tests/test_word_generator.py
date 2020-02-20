@@ -1,5 +1,5 @@
 import unittest
-from printed_text_dataset.text_gen.word_generator import WordGenerator
+from printed_text_dataset.text_generation.word_generator import WordGenerator
 
 class TestWordGenerator(unittest.TestCase):
     def test_WordGenerator(self):

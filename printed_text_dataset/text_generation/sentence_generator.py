@@ -1,7 +1,9 @@
 import random
-from printed_text_dataset.text_gen.word_generator import WordGenerator
 
-class SentenceGenerator:
+from printed_text_dataset.text_generation.generator import _Generator
+from printed_text_dataset.text_generation.word_generator import WordGenerator
+
+class SentenceGenerator(_Generator):
     """A class that generates sentences through calling the function sample()"""
     def __init__(self, word_generator : WordGenerator, length_distribution, punctuation_signs, punctuation_prob,
                  punctuation_sign_distribution, separator=" ", punctuation_format=["sps", "ps", "sp"],
@@ -29,6 +31,7 @@ class SentenceGenerator:
         punctuation_format_distribution : A list of integers that represents the probability of each punctuation format
         to be chosen during sampling. default : [1/3, 1/3, 1/3]
         """
+        super().__init__()
         self.word_generator = word_generator
         self.length_distribution = length_distribution
         self.separator = separator
