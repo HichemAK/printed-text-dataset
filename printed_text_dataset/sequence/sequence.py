@@ -10,7 +10,10 @@ class Sequence:
         return len(self.components)
 
     def __str__(self):
-        return sum(str(c) for c in self.components)
+        s = ""
+        for c in self.components:
+            s += str(c)
+        return s
 
     def __iter__(self):
         return iter(self.components)

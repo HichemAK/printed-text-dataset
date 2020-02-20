@@ -1,26 +1,23 @@
 import random
 
+from printed_text_dataset.sequence.sequence import Sentence, Separator, Punctuation
+from printed_text_dataset.text_generation.distribution import Distribution
 from printed_text_dataset.text_generation.generator import _Generator
 from printed_text_dataset.text_generation.word_generator import WordGenerator
 
 class SentenceGenerator(_Generator):
-    """A class that generates sentences through calling the function sample()"""
-    def __init__(self, word_generator : WordGenerator, length_distribution, punctuation_signs, punctuation_prob,
-                 punctuation_sign_distribution, separator=" ", punctuation_format=["sps", "ps", "sp"],
-                 punctuation_format_distribution=[1/3, ] * 3):
+    """A class that generates sentences through calling the function sample() which returns an instance of the class
+    Sentence"""
+    def __init__(self, word_generator : WordGenerator, min_length_distribution : Distribution, punctuation_prob,
+                 punctuation_sign_distribution : Distribution, separator=" ",
+                 punctuation_format_distribution : Distribution = None):
         """word_generator : an instance of the class word_generator.WordGenerator that is used to generate words
 
-        length_distribution : A list of integers that represents the probability of each length to be chosen during
-        sampling. Example : [0.7, 0.1, 0.2] means the sentence has a minimum length of 1 character with a probability of
-        0.7. While generating the sentence, when this minimum length is first reached or surpassed, the generation
-        stops.
-
-        punctuation_signs : A list that contains the characters that act as punctuation signs
+        min_length_distribution : The distribution of the minimum length of the sentence (in number of characters)
 
         punctuation_prob : It's the probability of the presence of a punctuation sign between two consecutive words
 
-        punctuation_distribution : A list of integers that represents the probability of each punctuation sign
-        to be chosen during the generation of the sentence
+        punctuation_sign_distribution : The distribution of punctuation signs
 
         separator : A String of characters that separates two consecutive words in the sentence. default = ' '
 
@@ -28,56 +25,54 @@ class SentenceGenerator(_Generator):
         we put punctuation we want to put first a separator (s) then the sign of punctuation (p) then another separator
         (s)
 
-        punctuation_format_distribution : A list of integers that represents the probability of each punctuation format
-        to be chosen during sampling. default : [1/3, 1/3, 1/3]
+        punctuation_format_distribution : The distribution of punctuation formats. By default =
+        Distribution({'sps' : 1/3, 'ps' : 1/3, 'sp' : 1/3]). 'sps' means that when we put punctuation we want to put
+        first a separator (s) then the sign of punctuation (p) then another separator (s)
         """
         super().__init__()
         self.word_generator = word_generator
-        self.length_distribution = length_distribution
+        self.min_length_distribution = min_length_distribution
         self.separator = separator
-        self.punctuation_signs = punctuation_signs
         self.punctuation_prob = punctuation_prob
         self.punctuation_sign_distribution = punctuation_sign_distribution
-        self.punctuation_format = punctuation_format
-        self.punctuation_format_distribution = punctuation_format_distribution
+        if self.punctuation_format_distribution is None:
+            self.punctuation_format_distribution = Distribution(dict(zip(["sps", "ps", "sp"], [1/3,] * 3)))
+        else:
+            self.punctuation_format_distribution = punctuation_format_distribution
 
     def sample(self):
-        """Generates a sentence. Returns a list of characters"""
-        min_length = self._get_random_min_length()
-        sentence = []
-        while True:
-            put_punctuation = self._get_put_punctuation()
+        """Generates a sentence. Returns a list of characters
+        The function chooses a minimun length (l) for the sentence according to min_length_distribution.
+        While the length of the sentence < min_length:
+            We generate a word and add it to the sentence. Before we generate
+            the next word, we put a separator or a punctuation sign according to punctuation_prob. If we put a
+            punctuation sign, we add it to the sentence according to a format (exemple : 'ps'). The format is chose
+            according to punctuation_format_distribution.
+        """
+        min_length = self.min_length_distribution.sample()
+        sentence = Sentence(components=list())
+        while len(sentence) < min_length:
             word = self.word_generator.sample()
+            sentence.components.append(word)
+
+            put_punctuation = self._get_put_punctuation()
             punctuation_formatted = []
             if put_punctuation:
-                punctuation_sign = self._get_random_punctuation_sign()
-                punctuation_format = self._get_random_punctuation_format()
+                punctuation_sign = self.punctuation_sign_distribution.sample()
+                punctuation_format = self.punctuation_format_distribution.sample()
                 for c in punctuation_format:
                     if c == 's':
-                        punctuation_formatted.append(self.separator)
+                        punctuation_formatted.append(Separator([self.separator, ]))
                     elif c == 'p':
-                        punctuation_formatted.append(punctuation_sign)
+                        punctuation_formatted.append(Punctuation([punctuation_sign, ]))
 
             if put_punctuation:
-                sentence.append(word)
-                sentence.append(punctuation_formatted)
+                sentence += punctuation_formatted
             else:
-                sentence.append(word)
-                sentence.append(list(self.separator))
-            if len(sentence) > min_length:
-                break
+                sentence.append(Separator([self.separator,]))
 
         return sentence
 
     def _get_put_punctuation(self):
         return random.random() < self.punctuation_prob
-
-    def _get_random_min_length(self):
-        return random.choices(range(1, len(self.length_distribution) + 1), self.length_distribution)[0]
-
-    def _get_random_punctuation_sign(self):
-        return random.choices(self.punctuation_signs, self.punctuation_sign_distribution)[0]
-
-    def _get_random_punctuation_format(self):
-        return random.choices(self.punctuation_format, self.punctuation_format_distribution)[0]
 
