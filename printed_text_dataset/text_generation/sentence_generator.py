@@ -75,6 +75,6 @@ class SentenceGenerator(_Generator):
 
     def _get_put_punctuation(self):
         """returns (x) that takes values (False, True) so that P(x=True) = self.punctuation_prob and
-        P(x=False) = 1 - self.punctuation_prob (Bernoulli Distribution)"""
+        P(x=False) = (1 - self.punctuation_prob).  (Bernoulli Distribution)"""
         return random.random() < self.punctuation_prob
 

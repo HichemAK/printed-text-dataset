@@ -42,6 +42,6 @@ class TextGenerator(_Generator):
                 text.append(Separator([self.separator, ]))
 
     def _get_put_separator(self):
-        """returns (x) that takes values (False, True) so that P(x=True) = self.punctuation_prob and
-        P(x=False) = 1 - self.punctuation_prob (Bernoulli Distribution)"""
-        return random.random() < self.punctuation_prob
+        """returns (x) that takes values (False, True) so that P(x=True) = self.separator_prob and
+        P(x=False) = (1 - self.punctuation_prob).   (Bernoulli Distribution)"""
+        return random.random() < self.separator_prob
