@@ -41,7 +41,7 @@ class SentenceGenerator(_Generator):
             self.punctuation_format_distribution = punctuation_format_distribution
 
     def sample(self):
-        """Generates a sentence. Returns a list of characters
+        """Generates a sentence. Returns a Sentence object
         The function chooses a minimun length (l) for the sentence according to min_length_distribution.
         While the length of the sentence < min_length:
             We generate a word and add it to the sentence. Before we generate
@@ -74,5 +74,7 @@ class SentenceGenerator(_Generator):
         return sentence
 
     def _get_put_punctuation(self):
+        """returns (x) that takes values (False, True) so that P(x=True) = self.punctuation_prob and
+        P(x=False) = 1 - self.punctuation_prob (Bernoulli Distribution)"""
         return random.random() < self.punctuation_prob
 
