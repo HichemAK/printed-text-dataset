@@ -19,6 +19,6 @@ class TestWordGenerator(unittest.TestCase):
         for _ in range(nb_iter):
             sample = wg.sample()
             self.assertTrue(isinstance(sample, Word))
-            self.assertTrue(len(sample) in wg.length_distribution.prob_dict.keys())
+            self.assertTrue(sample.length in wg.length_distribution.prob_dict.keys())
             for c in sample:
                 self.assertTrue(c in unicode_distribution.prob_dict.keys())

@@ -51,9 +51,9 @@ class SentenceGenerator(_Generator):
         """
         min_length = self.min_length_distribution.sample()
         sentence = Sentence(components=list())
-        while len(sentence) < min_length:
+        while sentence.length < min_length:
             word = self.word_generator.sample()
-            sentence.components.append(word)
+            sentence.append(word)
 
             put_punctuation = self._get_put_punctuation()
             punctuation_formatted = []
@@ -67,7 +67,8 @@ class SentenceGenerator(_Generator):
                         punctuation_formatted.append(Punctuation([punctuation_sign, ]))
 
             if put_punctuation:
-                sentence.components += punctuation_formatted
+                for c in punctuation_formatted:
+                    sentence.append(c)
             else:
                 sentence.append(Separator([self.separator,]))
 

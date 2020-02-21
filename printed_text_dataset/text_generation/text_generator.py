@@ -33,13 +33,14 @@ class TextGenerator(_Generator):
         """
         min_length = self.min_length_distribution.sample()
         text = Text()
-        while len(text) < min_length:
+        while text.length < min_length:
             sentence = self.sentence_generator.sample()
             text.append(sentence)
 
             put_separator = self._get_put_separator()
             if put_separator:
                 text.append(Separator([self.separator, ]))
+        return text
 
     def _get_put_separator(self):
         """returns (x) that takes values (False, True) so that P(x=True) = self.separator_prob and

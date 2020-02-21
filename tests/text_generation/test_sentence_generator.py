@@ -29,7 +29,7 @@ class TestSentenceGenerator(unittest.TestCase):
         min_length = min(k for k in min_length_distribution._keys)
         for _ in range(nb_iter):
             sentence = sg.sample()
-            self.assertTrue(len(str(sentence)) >= min_length)
+            self.assertTrue(sentence.length >= min_length)
             for c in sentence:
                 self.assertTrue(isinstance(c, (Word, Separator, Punctuation)))
 
