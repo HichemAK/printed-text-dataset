@@ -35,7 +35,7 @@ class SentenceGenerator(_Generator):
         self.separator = separator
         self.punctuation_prob = punctuation_prob
         self.punctuation_sign_distribution = punctuation_sign_distribution
-        if self.punctuation_format_distribution is None:
+        if punctuation_format_distribution is None:
             self.punctuation_format_distribution = Distribution(dict(zip(["sps", "ps", "sp"], [1/3,] * 3)))
         else:
             self.punctuation_format_distribution = punctuation_format_distribution
@@ -67,7 +67,7 @@ class SentenceGenerator(_Generator):
                         punctuation_formatted.append(Punctuation([punctuation_sign, ]))
 
             if put_punctuation:
-                sentence += punctuation_formatted
+                sentence.components += punctuation_formatted
             else:
                 sentence.append(Separator([self.separator,]))
 

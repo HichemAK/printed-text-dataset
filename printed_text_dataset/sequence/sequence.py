@@ -18,6 +18,12 @@ class Sequence:
     def __iter__(self):
         return iter(self.components)
 
+    def __getitem__(self, item):
+        return self.components[item]
+
+    def append(self, obj):
+        self.components.append(obj)
+
 class Word(Sequence):
     """Represents a word"""
     pass
