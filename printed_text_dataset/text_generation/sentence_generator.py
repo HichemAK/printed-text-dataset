@@ -42,11 +42,11 @@ class SentenceGenerator(_Generator):
 
     def sample(self):
         """Generates a sentence. Returns a Sentence object
-        The function chooses a minimun length (l) for the sentence according to min_length_distribution.
+        The function chooses a minimum length (l) for the sentence according to min_length_distribution.
         While the length of the sentence < min_length:
             We generate a word and add it to the sentence. Before we generate
             the next word, we put a separator or a punctuation sign according to punctuation_prob. If we put a
-            punctuation sign, we add it to the sentence according to a format (exemple : 'ps'). The format is chose
+            punctuation sign, we add it to the sentence according to a format (example : 'ps'). The format is chosen
             according to punctuation_format_distribution.
         """
         min_length = self.min_length_distribution.sample()

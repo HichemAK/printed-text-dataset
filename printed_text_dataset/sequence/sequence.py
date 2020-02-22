@@ -23,8 +23,8 @@ class Sequence:
         self._components.append(obj)
 
 class SequenceCharacter(Sequence):
-    """This class represents an sequence composed at the lowest level of characters."""
-    def __init__(self, components=list()):
+    """This class represents a sequence composed at the lowest level of characters."""
+    def __init__(self, components=None):
         super().__init__(components)
         self.length = len(self.__str__())
 
