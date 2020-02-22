@@ -22,7 +22,7 @@ class Sequence:
     def append(self, obj):
         self._components.append(obj)
 
-class SequenceC(Sequence):
+class SequenceCharacter(Sequence):
     """This class represents an sequence composed at the lowest level of characters."""
     def __init__(self, components=list()):
         super().__init__(components)
@@ -38,22 +38,22 @@ class SequenceC(Sequence):
         super().append(obj)
         self.length += len(str(obj))
 
-class Word(SequenceC):
+class Word(SequenceCharacter):
     """Represents a word"""
     pass
 
-class Separator(SequenceC):
+class Separator(SequenceCharacter):
     """Represents a separator"""
     pass
 
-class Sentence(SequenceC):
+class Sentence(SequenceCharacter):
     """Represents a sentence"""
     pass
 
-class Punctuation(SequenceC):
+class Punctuation(SequenceCharacter):
     """Represents a punctuation"""
     pass
 
-class Text(SequenceC):
+class Text(SequenceCharacter):
     """Represents a text"""
     pass
