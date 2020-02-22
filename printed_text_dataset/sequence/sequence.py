@@ -2,12 +2,14 @@ class Sequence:
     """This class represents an object that is an ordered sequence"""
     def __init__(self, components=None):
         """components : list containing the components of the sequence"""
-        assert components is None or isinstance(components, (list, tuple)), \
+        assert components is None or isinstance(components, (list, tuple, Sequence)), \
             "Components must be of type (list, tuple) or equal to None"
         if components is None:
             components = list()
         elif isinstance(components, tuple):
             components = list(components)
+        elif isinstance(components, Sequence):
+            components = components._components.copy()
         self._components = components
 
     def __len__(self):
@@ -37,6 +39,7 @@ class SequenceCharacter(Sequence):
     def append(self, obj):
         super().append(obj)
         self.length += len(str(obj))
+
 
 class Word(SequenceCharacter):
     """Represents a word"""
