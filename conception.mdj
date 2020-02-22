@@ -1919,30 +1919,13 @@
 											"height": 13,
 											"text": "-_components: list of objects = None",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFwZ3qo8OAgm2U=",
-											"_parent": {
-												"$ref": "AAAAAAFwXQX4Mf1p1D0="
-											},
-											"model": {
-												"$ref": "AAAAAAFwZ3qo4OAdoPo="
-											},
-											"font": "Arial;13;0",
-											"left": 1213,
-											"top": 637,
-											"width": 210.640625,
-											"height": 13,
-											"text": "+length: Integer",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1208,
 									"top": 617,
 									"width": 220.640625,
-									"height": 38
+									"height": 23
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1965,7 +1948,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1213,
-											"top": 660,
+											"top": 645,
 											"width": 210.640625,
 											"height": 13,
 											"text": "+__len__(): Integer",
@@ -2000,7 +1983,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1213,
-											"top": 675,
+											"top": 660,
 											"width": 210.640625,
 											"height": 13,
 											"text": "+__getitem__(item): Object",
@@ -2017,7 +2000,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1213,
-											"top": 690,
+											"top": 675,
 											"width": 210.640625,
 											"height": 13,
 											"text": "+append(obj)",
@@ -2026,7 +2009,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1208,
-									"top": 655,
+									"top": 640,
 									"width": 220.640625,
 									"height": 53
 								},
@@ -10324,9 +10307,9 @@
 											"font": "Arial;13;0",
 											"left": 272,
 											"top": 80,
-											"width": 73.67724609375,
+											"width": 94.64990234375,
 											"height": 13,
-											"text": "(from Model)"
+											"text": "(from sequence)"
 										},
 										{
 											"_type": "LabelView",
@@ -11092,15 +11075,6 @@
 									"visibility": "private",
 									"type": "list of objects",
 									"defaultValue": "None"
-								},
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAFwZ3qo4OAdoPo=",
-									"_parent": {
-										"$ref": "AAAAAAFwXQX4Mf1hk6Q="
-									},
-									"name": "length",
-									"type": "Integer"
 								}
 							],
 							"operations": [
@@ -11464,6 +11438,81 @@
 									"target": {
 										"$ref": "AAAAAAFwZ3w+5+fCwjA="
 									}
+								}
+							]
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFwZ3w+5+fCwjA=",
+							"_parent": {
+								"$ref": "AAAAAAFwXbvBcBmBd/Y="
+							},
+							"name": "SequenceC",
+							"ownedElements": [
+								{
+									"_type": "UMLGeneralization",
+									"_id": "AAAAAAFwZ4CFm/pOvXA=",
+									"_parent": {
+										"$ref": "AAAAAAFwZ3w+5+fCwjA="
+									},
+									"source": {
+										"$ref": "AAAAAAFwZ3w+5+fCwjA="
+									},
+									"target": {
+										"$ref": "AAAAAAFwXQX4Mf1hk6Q="
+									}
+								}
+							],
+							"documentation": "This class represents an sequence composed at the lowest level of characters\n",
+							"attributes": [
+								{
+									"_type": "UMLAttribute",
+									"_id": "AAAAAAFwZ4BB4Pduo+E=",
+									"_parent": {
+										"$ref": "AAAAAAFwZ3w+5+fCwjA="
+									},
+									"name": "length",
+									"type": ""
+								}
+							],
+							"operations": [
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAFwZ3/HOfMSqQ4=",
+									"_parent": {
+										"$ref": "AAAAAAFwZ3w+5+fCwjA="
+									},
+									"name": "__str__",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAFwZ3/e9fO+28E=",
+											"_parent": {
+												"$ref": "AAAAAAFwZ3/HOfMSqQ4="
+											},
+											"type": "String",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAFwZ4AaKPX6VRg=",
+									"_parent": {
+										"$ref": "AAAAAAFwZ3w+5+fCwjA="
+									},
+									"name": "append",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAFwZ4AqPvam/a8=",
+											"_parent": {
+												"$ref": "AAAAAAFwZ4AaKPX6VRg="
+											},
+											"name": "obj",
+											"type": ""
+										}
+									]
 								}
 							]
 						}
@@ -13031,80 +13080,6 @@
 											"type": ""
 										}
 									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"_type": "UMLClass",
-					"_id": "AAAAAAFwZ3w+5+fCwjA=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "SequenceC",
-					"ownedElements": [
-						{
-							"_type": "UMLGeneralization",
-							"_id": "AAAAAAFwZ4CFm/pOvXA=",
-							"_parent": {
-								"$ref": "AAAAAAFwZ3w+5+fCwjA="
-							},
-							"source": {
-								"$ref": "AAAAAAFwZ3w+5+fCwjA="
-							},
-							"target": {
-								"$ref": "AAAAAAFwXQX4Mf1hk6Q="
-							}
-						}
-					],
-					"documentation": "This class represents an sequence composed at the lowest level of characters\n",
-					"attributes": [
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFwZ4BB4Pduo+E=",
-							"_parent": {
-								"$ref": "AAAAAAFwZ3w+5+fCwjA="
-							},
-							"name": "length"
-						}
-					],
-					"operations": [
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAFwZ3/HOfMSqQ4=",
-							"_parent": {
-								"$ref": "AAAAAAFwZ3w+5+fCwjA="
-							},
-							"name": "__str__",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFwZ3/e9fO+28E=",
-									"_parent": {
-										"$ref": "AAAAAAFwZ3/HOfMSqQ4="
-									},
-									"type": "String",
-									"direction": "return"
-								}
-							]
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAFwZ4AaKPX6VRg=",
-							"_parent": {
-								"$ref": "AAAAAAFwZ3w+5+fCwjA="
-							},
-							"name": "append",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFwZ4AqPvam/a8=",
-									"_parent": {
-										"$ref": "AAAAAAFwZ4AaKPX6VRg="
-									},
-									"name": "obj",
-									"type": ""
 								}
 							]
 						}
